@@ -150,3 +150,5 @@ Should be:
 lisp((all-equal non-t) t) ; CORRECT
 
 (ii) I asked it to have a single data for test cases that can be used for testing as well as for verification using ACL2s.
+
+(iii) Claude understood by itself that proveme.lisp is for ACL2s.
