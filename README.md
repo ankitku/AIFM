@@ -1,13 +1,33 @@
-# Author: Ankit Kumar
+# Propositional Formula Simplifier
 
-# How to run:
+**Author:** Ankit Kumar
 
-1. sbcl --load simplifier.lisp
-   This will run the simplifier on test cases, and generate a file called proveme.lisp on those same test cases.
-2. acl2s < proveme.lisp
-   This will prove that each of the test cases test equivalent propositional formulae.
+## How to Run
 
-# Approach
+1. **Test and generate verification file:**
+
+```bash
+   sbcl --load simplifier.lisp
+```
+
+This runs the simplifier on test cases and generates proveme.lisp with ACL2s properties.
+
+2. **Formally verify with ACL2s:**
+
+```bash
+   acl2s < proveme.lisp
+```
+
+This proves that each test case maintains logical equivalence.
+
+3. **Build Executable:**
+
+```bash
+   sbcl --load simplifier.lisp --eval '(sb-ext:save-lisp-and-die "simplify" :toplevel #'"toplevel :executable t)'
+   ./simplify input.txt output.txt
+```
+
+## Development Process
 
 1. I initially used x-ai/grok-code-fast-1 to generate a simplifier.
    This first sample had several issues. First of all, parens were not matching and  
@@ -141,7 +161,7 @@ Clean output: Generates properly formatted proveme.lisp
 # Observations:
 
 1. Claude 4.5 with Think is so insanely awesome that I could have just 1 shotted this assignment.
-2. I only needed to follow up twice:
+2. I only needed to follow up with Claude twice:
 
 (i) there was an error in one of the simplifying functions:
 The error is in the apply-constant-propagation function. The bug is here:
@@ -151,4 +171,6 @@ lisp((all-equal non-t) t) ; CORRECT
 
 (ii) I asked it to have a single data for test cases that can be used for testing as well as for verification using ACL2s.
 
-(iii) Claude understood by itself that proveme.lisp is for ACL2s.
+3. Claude understood by itself that proveme.lisp is for ACL2s.
+4. I would rank the thinking, understanding and implementation capabilities of the LLMs I used as shown:
+   x-ai/grok-code-fast-1 < Google Gemini Agent < Claude 4.5 with Think
